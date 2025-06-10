@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>District and Resource Center Form</title>
+  <style>
+    .other-section, .resource-section {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Select District</h2>
+  <form id="districtForm">
+    <div class="other-section" id="sec">
+        <label><input type="radio" name="district" value="Berea"> Berea</label><br>    
+        <label><input type="radio" name="district" value="Buthabuthe"> Butha-Buthe</label><br>
+        <label><input type="radio" name="district" value="Leribe"> Leribe</label><br>
+        <label><input type="radio" name="district" value="Maseru"> Maseru</label><br>
+        <label><input type="radio" name="district" value="Mokhotlong"> Mokhotlong</label><br>
+        <label><input type="radio" name="district" value="Mafeteng"> Mafeteng</label><br>
+        <label><input type="radio" name="district" value="MohalesHoek"> Mohale's Hoek</label><br>
+        <label><input type="radio" name="district" value="ThabaTseka"> Thaba-Tseka</label><br>
+        <label><input type="radio" name="district" value="QachasNeck"> Qacha's Neck</label><br>
+        <label><input type="radio" name="district" value="Quthing"> Quthing</label><br>
+    </div>
+    <div class="resource-section" id="resourceSection" style="display:none;">
+      <h3>Select Resource Center</h3>
+      <select id="resourceSelect">
+        <!-- Options will be populated dynamically --> 
+
+      </select>
+    </div>
+    <div class="other-section" id="sec">
+        <h3>Select the correct SFA</h3>
+        <label><input type="radio" name="SFA" value="SFA 1"> SFA 1</label><br>    
+        <label><input type="radio" name="SFA" value="SFA 2"> SFA 2</label><br>
+        <label><input type="radio" name="SFA" value="SFA 3"> SFA 3</label><br>
+    </div>
+  </form>
+
+  <script>
+    const resourceCenters = {
+      Berea: ["Corn Exchange", "Mapoteng", "Maqhaka", "Pilot", "Sehlabeng"],
+      Maseru: ["Semonkong", "Marakabei", "Ramabanta", "Ntsi", "Masianokeng", "Morija", "Rothe"],
+      Buthabuthe: ["Rampai", "Matsoaing", "Qholaqhoe", "Khukhune", "Ngoajane", "Selomo", "Nqabeni"],
+      Leribe: ["Tale", "Khabo", "Hlotse", "Maputsoe", "Peka"],
+      MohalesHoek: ["Taung", "Makhaleng", "Mpharane", "Phamong", "Mekaling", "Ketane", "Hloahloeng", "Ramosothoane"],
+      Quthing: ["Makoae", "Koali", "Mphaki", "Qomoqomong", "Tele", "Tlatlametsi"],
+      ThabaTseka: ["Semenanyana", "Mohlanapeng", "Mantsonyane", "Lesobeng", "Sehongjong", "Khohlontso"],
+      Mafeteng: ["Kolo", "Matelile", "Mosala", "Ramokoatsi", "Tsakholo", "Thabana-Morena", "Ribaneng"],
+      QachasNeck: ["Letlapeng", "Matebeng", "Melikane", "Qhoalinyane", "Sehlabathebe", "Thaba-chitja"],
+      Mokhotlong: ["Malefiloane", "Libibing", "Phahameng", "Thabang", "Mapholaneng"]   
+    };
+    //resource centers
+    const radios = document.querySelectorAll('input[name="district"]');
+    const resourceSection = document.getElementById("resourceSection");
+    const resourceSelect = document.getElementById("resourceSelect");
+
+    radios.forEach(radio => {
+      radio.addEventListener("change", () => {
+        const selectedDistrict = radio.value;
+        const centers = resourceCenters[selectedDistrict];
+
+        // Clear previous options
+        resourceSelect.innerHTML = "";
+
+        // Populate new options
+        centers.forEach(center => {
+          const option = document.createElement("option");
+          option.value = center;
+          option.textContent = center;
+          resourceSelect.appendChild(option);
+        });
+
+        resourceSection.style.display = "block";
+
+        //Strategic Objectives
+        // const rbtn = document.querySelectorAll('input[name="SFA"]');
+        // const sec = document.getElementById("sec");
+        // const sfaSelect = document.getElementById("");
+      });
+    });
+  </script>
+</body>
+</html>
